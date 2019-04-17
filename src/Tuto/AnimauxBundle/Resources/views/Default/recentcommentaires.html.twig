@@ -1,0 +1,3 @@
+{% for commentaire in commentaires %}
+    <li><a style="line-height:22px" href="{{ path("tuto_animaux_voir_commentaire", {'id': commentaire.id }) }}" title="Voir {{ commentaire.commentaire}}">{{ commentaire.commentaire}}</a></li>
+{% endfor %}

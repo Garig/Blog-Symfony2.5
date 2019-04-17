@@ -1,0 +1,35 @@
+{% extends "::base2.html.twig" %}
+
+{% block title %}Articles | Administration{% endblock %}
+
+{% block body %}
+        
+<h3>Articles existants</h3>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Titre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for article in articles %}
+                <tr>
+                    <td>{{loop.revindex}}</td>
+                    <td>{{ article.titre }}</td>
+                    <td>
+                        <a href="{{ path('tuto_animaux_editer', {'id': article.id }) }}"><i class="fa fa-refresh"></i>&nbsp;Modifier</a>&nbsp;&nbsp;
+                        <a href="{{ path('tuto_animaux_supprimer', {'id': article.id }) }}"><i class="fa fa-trash"></i>&nbsp;Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tuto_animaux_ajouter')}}"><i class="fa fa-pencil"></i>&nbsp;Nouvel article</a><br>
+    <a href="{{ path('adminPages_softdel')}}"><i class="fa fa-trash"></i>&nbsp;Corbeille</a>
+
+{% endblock %}

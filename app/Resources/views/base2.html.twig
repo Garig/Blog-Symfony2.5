@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Web-City.fr | Blog Symfony3{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block description %}Web-City.fr est un blog réalisé avec le framework PHP Symfony3. Ce site propose des tutoriels sur les technologies Symfony, Doctrine, Twig, Composer et Angular.{% endblock %}" />
+
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/tutoanimaux/css/menu_responsive.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/tutoanimaux/css/pagination.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/tutoanimaux/css/accordion.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/tutoanimaux/css/dropdown.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/tutoanimaux/css/style.css') }}" />
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/blog/images/favicon.ico') }}" />
+    </head>
+
+    <body>
+        <div class="container">
+                <header class="header">   
+                    <div class="container">
+                        <div class="row">
+                
+                                   <a href="#" onclick="openNav()" class="header__icon" id="header__icon"></a>
+                                   <a href="{{ path("tuto_animaux_homepage") }}" class="header__logo js-scrollTo" style="font-size:22px">WEB-CITY.fr</a>
+                                
+                                  
+                                    <nav class="menu">
+                                        <div class="dropdown">
+                                          <a class="dropbtn">Catégories</a>
+                                          <div class="dropdown-content">
+                                            <ul style="padding:0;margin:0;">
+                                                {% render(controller('TutoAnimauxBundle:Categories:menu', {'limit': 4} )) %}
+                                            </ul>
+                                          </div>
+                                        </div>
+                                       <div class="dropdown">
+                                          <a class="dropbtn">Liens</a>
+                                          <div class="dropdown-content">
+                                            <a href="http://www.mydevphp.com/category/symfony2" target="_blank">Aide mémoire</a>
+                                            <a href="http://www.tutoriel-symfony2.fr/" target="_blank">Lire le blog</a>
+                                            <a href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2" target="_blank">Tutoriel</a>
+                                            <a href="http://www.symfony2-checklist.com/fr" target="_blank">Checklist</a>
+                                          </div>
+                                        </div>
+                                      <a href="{{ path('contact') }}">Contact</a>
+                                    </nav>
+            
+
+                                    <div id="recherche" style="float:right;line-height:28px;margin-top:7px">
+                                        {{ render(controller('TutoAnimauxBundle:Default:recherche')) }} 
+                                    </div>
+
+
+                        </div>
+                    </div>
+                </header>
+        
+
+            <div class="row" style="clear:both;margin-top:70px;">
+
+                <div id="mySidenav" class="sidenav">
+                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                  
+                            <a href="{{ path('tuto_animaux_homepage') }}" class="accordion lien">Accueil</a>
+                            
+                            <button class="accordion"><a href="#" style="margin-left:0px;display:inline-block" class="js-scrollTo">Catégories</a></button>
+                            <div class="panel">
+                                <ul style="padding:0;margin:0;">
+                                    {% render(controller('TutoAnimauxBundle:Categories:menu', {'limit': 4} )) %}
+                                </ul>
+                            </div>
+
+                            <button class="accordion"><a href="#" style="margin-left:0px;display:inline-block" class="js-scrollTo">Liens</a></button>
+                            <div class="panel">
+                                <ul style="padding:0;margin:0;">
+                                    <li><a href="http://www.mydevphp.com/category/symfony2" class="accordion3" target="_blank">Aide mémoire</a></li>
+                                    <li><a href="http://www.tutoriel-symfony2.fr/" class="accordion3" target="_blank">Lire le blog</a></li>
+                                    <li><a href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2" class="accordion3" target="_blank">Tutoriel</a></li>
+                                    <li><a href="http://www.symfony2-checklist.com/fr" class="accordion3" target="_blank">Checklist</a></li>
+                                </ul>
+                            </div>
+                  
+                            <a href="{{ path('contact') }}" class="accordion lien">Contact</a>
+
+                            <div id="rechercheResponsive" style="float:right;line-height:28px;margin-top:7px">
+                                {{ render(controller('TutoAnimauxBundle:Default:recherche')) }} 
+                            </div>
+                
+                </div>
+
+    
+                <div id="content" class="col-lg-9 col-md-12 col-xs-12" style="float:left;">
+
+                <div>
+                    {% for messages in app.session.flashBag.all %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+                <div>
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                </div>
+
+                {% block body %}
+                {% endblock %}
+                </div>
+
+                <div id="menu" class="col-lg-3 col-md-12 col-xs-12" style="float:left;padding-left: 15px;box-sizing: border-box">
+                
+                    <!--<button class="accordion"><h3 style="display:inline-block;color:#333333">Identification</h3></button>
+
+                    <div class="panel">
+                        <ul class="nav nav-pills nav-stacked menu">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} 
+                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-user-times"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-user"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-server"></i> Inscription</a></li>
+                    </ul>
+                    </div>
+                    -->
+            
+                    {% if is_granted('ROLE_USER') %}
+                 <div style="margin-bottom:50px">
+                    <button class="accordion"><h3 style="display:inline-block;margin:10px;padding:0px;color:#333333">Dashboard</h3></button>
+                    <div class="panel">
+                        <ul class="nav nav-pills nav-stacked menu" style="margin:0 0 25px 0;">
+                        <li><a href="{{ path('articles_index') }}"><i class="fa fa-pencil"></i> Articles</a></li>
+                        <li><a href="{{ path('categories_index') }}"><i class="fa fa-pencil"></i> Catégories</a></li>
+                        <li><a href="{{ path('commentaires_index') }}"><i class="fa fa-pencil"></i> Commentaires</a></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-user-times"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                    </ul>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="wrap" style="clear:both;margin-bottom:30px">
+                    <h3 style="display:clear:both;padding-bottom:5px;border-bottom:1px dotted gray">Informations</h3>
+                    <p style="text-align:left;"><b>Web-City.fr</b> est le blog Symfony3 de <b>Alexandre Houriez</b>. Il a été réalisé avec le <b>framework PHP Symfony</b>. Ce site propose des tutoriels sur les technologies Symfony, Doctrine, Twig Composer et Angular.</p>
+                </div>
+
+                <div class="wrap" style="clear:both">
+                    <h3 style="display:clear:both">Articles récents</h3>
+                    <ul style="margin:0;padding:0">
+                        {% render(controller('TutoAnimauxBundle:Default:recentArticles', {'limit': 1} )) %}
+                    </ul>
+                </div>
+                    
+                    {#<h3>Commentaires récents</h3>
+                    <ul class="nav nav-pills nav-stacked menu">
+                        {% render(controller('TutoAnimauxBundle:Commentaires:recentCommentaires', {'max': 1} )) %}
+                    </ul>#}
+
+                {#{{ render(controller('TutoAnimauxBundle:Default:recentArticles', { 'max': 3 })) }}#}
+
+                </div>
+
+
+            </div>
+
+            <hr>
+
+            <footer>
+                <p align="center">Web-City.fr @ 2017</p>
+            </footer>
+        </div>
+
+            <script type="text/javascript" src="{{ asset ('https://use.fontawesome.com/fb3bdccdce.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/tutoanimaux/ckeditor/ckeditor//ckeditor.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/tutoanimaux/js/accordion.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/tutoanimaux/js/menu_responsive.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/tutoanimaux/js/scroll.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/tutoanimaux/js/social.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
+

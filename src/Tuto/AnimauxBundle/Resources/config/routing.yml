@@ -1,0 +1,77 @@
+tuto_animaux_homepage:
+    path:     /
+    defaults: { _controller: TutoAnimauxBundle:Default:index }
+    
+categorieProduits:
+    path:     /categorie/{slug}
+    defaults: { _controller: TutoAnimauxBundle:Default:index}
+
+tuto_animaux_ajouter:
+    path:     /admin/ajouterArticle
+    defaults: { _controller: TutoAnimauxBundle:Default:ajouter }
+    
+tuto_animaux_ajouterCategorie:
+    path:     /admin/ajouterCategorie
+    defaults: { _controller: TutoAnimauxBundle:Categories:ajouterCategorie }
+
+tuto_animaux_voir:
+    path:     /article/{slug}
+    defaults: { _controller: TutoAnimauxBundle:Default:voir }
+
+tuto_animaux_editer:
+    path:     /admin/editer/{id}
+    defaults: { _controller: TutoAnimauxBundle:Default:editer }
+    requirements:
+        id: \d+
+     
+tuto_animaux_editerCategorie:
+    path:     /admin/editerCategorie/{id}
+    defaults: { _controller: TutoAnimauxBundle:Categories:editerCategorie }
+    requirements:
+        id: \d+
+
+tuto_animaux_supprimer:
+    path:     /admin/supprimer/{id}
+    defaults: { _controller: TutoAnimauxBundle:Default:supprimer }
+    requirements:
+        id: \d+
+        
+tuto_animaux_supprimerCategorie:
+    path:     /admin/supprimerCategorie/{id}
+    defaults: { _controller: TutoAnimauxBundle:Categories:supprimerCategorie }
+    requirements:
+        id: \d+
+
+articles_index:
+    path:     /admin/articles
+    defaults: { _controller: TutoAnimauxBundle:Default:articlesAdministration }
+
+categories_index:
+    path:     /admin/categories
+    defaults: { _controller: TutoAnimauxBundle:Default:categoriesAdministration }
+
+commentaires_index:
+    path:     /admin/commentaires
+    defaults: { _controller: TutoAnimauxBundle:Default:commentairesAdministration }
+    
+commentaires_delete:
+    path:     /admin/commentaire/supprimer/{id}
+    defaults: { _controller: TutoAnimauxBundle:Default:commentairesAdministrationDelete }
+
+contact:
+    path:     /contact
+    defaults: { _controller: TutoAnimauxBundle:Pages:contact }
+    
+        
+adminPages_softdel:
+    path:  /admin/soft/del
+    defaults: { _controller: "TutoAnimauxBundle:Default:softDel" }
+
+adminPages_restore:
+    path:  /admin/{id}/restore
+    defaults: { _controller: "TutoAnimauxBundle:Default:restore" }
+    
+rechercheProduits:
+    path:     /recherche
+    defaults: { _controller: TutoAnimauxBundle:Default:rechercheTraitement}
+    

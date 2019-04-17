@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+Blog | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<h1>Blog</h1>
+
+<hr>
+
+{# on définit un nouveau bloc que les vues pourront remplir #}
+{% block sdzblog_body %}
+{% endblock %}
+
+
+
+{% endblock %}

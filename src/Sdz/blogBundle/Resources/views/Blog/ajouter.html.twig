@@ -1,0 +1,25 @@
+{% extends "blogBundle::layout.html.twig" %}
+
+{% block title %}
+Ajouter un article- {{ parent() }}
+{% endblock %}
+
+
+{% block sdzblog_body %}
+
+<h2>Ajouter un article</h2>
+
+{% include "blogBundle:Blog:formulaire.html.twig" %}
+
+
+<p>Vous voulez ajouter un article au blog.</p>
+
+<p>
+{# je mets path('sdzblog_voir', {'id': 5}) pour que la vue fonctionn sinon c est path('sdzblog_voir', {'id': article.id })#}
+<a href="{{ path('sdzblog_voir', {'id': 5}) }}" class="btn">
+<i class="icon-chevron-left"></i>
+Retour à l'article</a>
+</p>
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "::base2.html.twig" %}
+
+{% block title %}{{animal.titre}} - {{parent()}}{% endblock %}
+{% block description %}{{animal.description|truncate(210,true,' ')|striptags}}{% endblock %}
+
+{% block body %}
+		<div class="wrap">
+			
+		    <h1 style="margin-bottom:10px">{{ animal.titre}}</h1>
+                    <h4 style="display:inline-block;float:left;font-weight:bold;margin-top:3px">{{ animal.date|date ('d m Y')}}</h4>
+                       <p style="display:inline-block;float:right;position:relative"> {% if animal.commentaires|length ==1 %}<span class="com2"></span> {{ animal.commentaires|length }} commentaire {% elseif animal.commentaires|length > 1 %}<span class="com2"></span> {{ animal.commentaires|length }} commentaires{% endif%}</p>
+			
+			<div class="content" style="clear:both">
+			{% if animal.url|length > 0 %}<img src="{{ animal.url }}" alt="{{ animal.titre}}" class="border">{% endif %}
+			<p class="espace">{{ animal.description|raw}}</p><br>
+
+            
+
+                <button class="button share_twitter twitter" data-url="{{uri}}">
+                    <span class="partager">Tweeter</span>
+                </button>
+                <button class="button share_facebook facebook" data-url="{{uri}}">
+                    <span class="partager">Partager</span>
+                </button>
+                <button class="button share_gplus google" data-url="{{uri}}">
+                    <span class="partager">Partager</span>
+                </button>
+                <button class="button share_linkedin linkedin" data-url="{{uri}}">
+                    <span class="partager">Partager</span>
+                </button>
+            
+
+                <p style="float:right;display:inline-block;margin-bottom:40px">
+                    <i class="fa fa-tag"></i>&nbsp;catégorie:<b> {{animal.categorie.nom}}</b>
+                </p>
+
+            </div><br>
+            
+
+            
+            <div style="clear:both;margin-top:40px">
+                        {% if commentaires | length != 0 %}
+                            <h4 style="margin-bottom:12px;margin-top:18px">Commentaires</h4>
+                            {% for commentaire in commentaires%}
+                                <div id="comment{{ commentaire.id }}" itemscope itemtype="http://schema.org/Comment" class="commentaires">
+                                    <p class="author" style="position:relative"><span class="com"></span><span style="margin-left:25px">{{ commentaire.auteur }}</span>
+                                        <span style="font-size:10px;color:gray">posté le {{ commentaire.date|date('d/m/Y', "Europe/Paris") }} à {{ commentaire.date|date('H:i', "Europe/Paris") }}</span></p>
+                                    <p class="comment espace">{{ commentaire.commentaire |nl2br}}</p>
+                                </div>
+                                <br>  
+                            {% endfor %}
+                        {% endif %}
+            </div>
+
+                                
+                     
+                            <br>  
+                        <div class="content" style="padding-bottom:60px">
+                            <h4 style="margin-bottom:12px">Laisser un commentaire</h4>
+                            <form action="{{ path("tuto_animaux_voir", {'slug': animal.slug}) }}" method="post">
+                                    {{ form_row(form.auteur, { 'attr': {'class': 'form-auteur'} }) }}
+                                    {#{{ form_row(form.animal) }}#}
+
+                                    {{ form_row(form.commentaire, { 'attr': {'class': 'form-description'} }) }}
+                                    {#{{ form_row(form.animal) }}#}
+
+                                    {{ form_rest(form) }}
+                            <button type="submit" class="btn btn-primary bouton pull-right">Envoyer</button>
+                            </form>
+                        </div>
+        
+		</div>
+
+
+{% endblock %}

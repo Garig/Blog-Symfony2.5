@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mon titre carte sans block</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/redproject/css/style.css') }}" type="text/css"/>
+        {% endblock %}
+    </head>
+<body>
+<h1 style="color:red">La c'est ma carte RED de marque {{marque}}!!!</h1>
+<h2>C'est ouf symfony ! n'est ce pas {{name}}</h2>
+        <div class="illustration">
+            <img src="{{ asset('bundles/redproject/images/carte.png') }}" alt="Quick tour" />
+        </div>
+</body>
+</html>

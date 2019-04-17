@@ -1,0 +1,12 @@
+		<div class="wrap">
+			
+				<h2>{{ animal.titre}}</h2>
+				<h5>{{ animal.date|date ('d m Y')}}</h5>
+				<h5>Article modifié par {{ app.user.username }}</h5>
+			
+			<div class="content">
+                        {% if animal.url|length > 0%}<img src="{{ animal.url }}" alt="{{ animal.titre}}" class="border">{% endif %}
+			<p>{{ animal.description|raw}}</p>
+                        <p align=center"><a href="http://www.web-city.fr">Web-city.fr</a></p>
+			</div>
+		</div>

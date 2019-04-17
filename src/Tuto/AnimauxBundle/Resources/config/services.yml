@@ -1,0 +1,8 @@
+services:
+    webcity.antispam:
+        class: Tuto\AnimauxBundle\Antispam\WebCityAntispam
+        arguments: [@mailer, 5]
+        tags:
+            -  { name: twig.extension }
+        calls:
+            - [ setLocale, [%locale%] ]

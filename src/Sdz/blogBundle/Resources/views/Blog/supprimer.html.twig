@@ -1,0 +1,24 @@
+{% extends "blogBundle::layout.html.twig" %}
+
+{% block title %}
+Supprimer un article- {{ parent() }}
+{% endblock %}
+
+
+{% block sdzblog_body %}
+
+<h2>Supprimer un article</h2>
+
+<a href="{{ path ('sdzblog_voir', {'id': article.id}) }}">{{ article.titre}}</a>
+
+<p>Vous voulez supprimer un article au blog.</p>
+
+<p>
+<a href="{{ path('sdzblog_voir', {'id': article.id }) }}" class="btn">
+<i class="icon-chevron-left"></i>
+Retour à l'article</a>
+</p>
+
+
+{% endblock %}
+

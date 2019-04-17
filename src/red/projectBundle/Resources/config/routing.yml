@@ -1,0 +1,20 @@
+redproject_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: redprojectBundle:Default:index }
+
+HelloTheWorld:
+    path: /redbull
+    defaults : { _controller: redprojectBundle:jaffiche:tshirt }
+
+vistaprint:
+    path: /macarte/{marque}
+    defaults : { _controller: redprojectBundle:jaffiche:carte}
+
+redirectionseclin:
+    path: /directionseclin
+    defaults : { _controller: redprojectBundle:jaffiche:polo}
+
+redirectionlille:
+    path: /directionlille
+    defaults : { _controller: redprojectBundle:jaffiche:aspi}
+

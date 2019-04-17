@@ -1,0 +1,10 @@
+		<div class="wrap">
+			
+				<h2>{{ commentaire.auteur}}</h2>
+				<h5>{{ commentaire.date|date ('d m Y')}}</h5>
+				<h5>Commentaire posté par {{ commentaire.auteur }} sur l'article {{ commentaire.animal.titre}}</h5>
+			
+			<div class="content">
+			<p>{{ commentaire.commentaire|nl2br}}</p>
+			</div>
+		</div>

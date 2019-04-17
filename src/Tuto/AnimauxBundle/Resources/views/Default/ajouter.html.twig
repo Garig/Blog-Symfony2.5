@@ -1,0 +1,29 @@
+{% extends "::base2.html.twig" %}
+
+{% block title %}Articles | Administration{% endblock %}
+
+{% block body %}
+
+<h1 class="index">Ajouter un article</h1>
+
+<form method="post" action="{{ path("tuto_animaux_ajouter") }}" {{ form_enctype(form) }}>
+
+        {{ form_label(form.titre) }}
+        {{ form_errors(form.titre) }}
+        {{ form_widget(form.titre, { 'attr': {'class': 'form-titre'} }) }}
+	
+        {#{{ form_row(form.titre, { 'attr': {'class': 'form-titre'} }) }}#}
+
+	{{ form_row(form.description, { 'attr': {'class': 'ckeditor'} }) }}
+
+	{{ form_row(form.url, { 'attr': {'class': 'form-url'} }) }}
+
+	{{ form_row(form.categorie, { 'attr': {'class': 'form-titre'} }) }}
+
+	{{ form_rest(form) }}
+
+    <input type="submit" class="btn btn-primary bouton">
+</form>
+    
+
+{% endblock %}

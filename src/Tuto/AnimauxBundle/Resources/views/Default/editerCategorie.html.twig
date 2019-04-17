@@ -1,0 +1,25 @@
+{% extends "::base2.html.twig" %}
+
+{% block title %}Editer catégorie | Administration{% endblock %}
+
+{% block body %}
+
+<h1 class="index">Modifier une catégorie</h1>
+
+<form method="post" action="{{ path("tuto_animaux_editerCategorie", {id: id}) }}" {{ form_enctype(form) }}>
+
+        {{ form_label(form.nom) }}
+        {{ form_errors(form.nom) }}
+        {{ form_widget(form.nom, { 'attr': {'class': 'form-titre'} }) }}
+        
+        {{ form_label(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description, { 'attr': {'class': 'form-titre'} }) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" class="btn btn-primary bouton">
+</form>
+    
+
+{% endblock %}

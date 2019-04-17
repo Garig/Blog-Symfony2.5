@@ -1,0 +1,37 @@
+{% extends "::base2.html.twig" %}
+
+{% block title %}{% if categorie|length != 0 %}{{categorie.nom}} - {{parent()}}{%else %}{{parent()}}{% endif %}{% endblock %}
+{% block description %}{% if categorie|length != 0 %}{{categorie.description|truncate(210,true,' ')}}{%else %}{{parent()}}{% endif %}{% endblock %}
+
+{% block body %}
+    
+                {% if animaux|length != 0 %}
+                        
+                    {% for animal in animaux %}
+                        <div class="wrap">
+		            <h1 style="margin-bottom:10px"><a href="{{ path("tuto_animaux_voir", {'slug': animal.slug }) }}" title="Voir {{ animal.titre}}">{{ animal.titre}}</a></h1>
+		            <h4 style="display:inline-block;float:left;font-weight:bold;margin-top:3px">{{ animal.date|date ('d m Y')}}</h4>
+                    <p style="display:inline-block;float:right;position:relative"> {% if animal.commentaires|length ==1 %}<span class="com2"></span> {{ animal.commentaires|length }} commentaire {% elseif animal.commentaires|length > 1 %}<span class="com2"></span> {{ animal.commentaires|length }} commentaires{% endif%}</p>
+                            <div class="content" style="clear:both;padding-bottom:15px">
+                            {% if animal.url|length > 0%}<img src="{{ animal.url }}" alt="{{animal.titre}}" class="border">{% endif%}
+                            <p class="espace">{{ animal.description|truncate(410,true,' ')|raw}}<a href="{{ path("tuto_animaux_voir", {'slug': animal.slug }) }}" class="suite" title="Voir {{ animal.titre}}">lire la suite</a></p>
+                            {#<p>catégorie : <a href="{{ path("categorieProduits", {'categories': categories.id }) }}" title="Voir {{ animal.titre}}">{{ animal.categorie.nom}}</a></p>#}
+                            <p style="float:right;display:block;margin-bottom:0px">
+                            <i class="fa fa-tag"></i>&nbsp;catégorie:<b> {{animal.categorie.nom}}</b>
+                            </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                            
+                          {# display navigation #}
+                        <div class="navigation">
+                            {{ knp_pagination_render(animaux) }}
+                        </div>
+                     
+                        
+                {% else %}
+                    <p>Il n y a pas d'articles dans cette catégorie</p>
+                {% endif %}
+                
+
+{% endblock %}

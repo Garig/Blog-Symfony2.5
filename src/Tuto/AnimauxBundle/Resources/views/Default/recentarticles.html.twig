@@ -1,0 +1,3 @@
+{% for animal in animaux %}
+    <li class="list"><a href="{{ path("tuto_animaux_voir", {'slug': animal.slug }) }}" title="Voir {{ animal.titre}}">{{ animal.titre}}</a></li>
+{% endfor %}
